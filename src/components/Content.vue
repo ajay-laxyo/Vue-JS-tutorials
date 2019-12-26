@@ -1,51 +1,55 @@
 <template>
   <div>
   	<h3>Play List</h3>
+  	{{ name }} <p> {{ tutorialName }} </p>
   		<ul>
-  			<li v-for="links in playList">
+  			<li v-for="links in myplayList">
   				<a v-bind:href="links.gitHubLink" v-bind:title="links.title" target="_blank">
   					{{ links.name }}
   				</a>
   			</li>
   		</ul>
+  		<h2>Student list</h2>
+	    <ul>
+	      <li v-for="std in stds"> {{ std }} </li>
+	    </ul>
+	    <button v-on:click="deleteStds">Delete Student</button>
+	    <h2> my message : {{ myMsg }} </h2>
   </div>
 </template>
 
 <script>
 export default {
+	// props : ['myplayList', "name", 'tutorialName'], 
+	//"tutorial-name" is changed into camal case like "tutorialName"
+	props:{
+		myMsg:{
+	      type : String
+	    },
+		stds:{
+			type : Array
+		},
+		name:{
+			type : String,
+			//required : true,
+			//default : "default name"
+		},
+		myplayList:{
+			type : Array 
+		},
+		tutorialName:{
+			type : String
+		}
+	},
   data () {
     return {
-      playList : [
-      	{
-      		name : "Laravel RESTful API CRUD development", 
-      		gitHubLink : "https://github.com/ajay-laxyo/RESTful-API-CRUD-On-Laravel-6", 
-      		title : "Laravel RESTful API CRUD development"
-      	},
-      	{
-      		name : "Yii2 CRUD development", 
-      		gitHubLink : "https://github.com/ajay-laxyo/Yii2-company-branch-dept-CRUD-file-upload-With-Gii", 
-      		title : "Yii2-company-branch-dept-CRUD-file-upload-With-Gii"
-      	},
-      	{
-      		name : "Yii2 CRUD development Without Gii", 
-      		gitHubLink : "https://github.com/ajay-laxyo/Yii2-CRUD-without-Gii", 
-      		title : "Yii2-CRUD-without-Gii"
-      	},
-      	{
-      		name : "Laravel Roles and Permissions development", 
-      		gitHubLink : "https://github.com/ajay-laxyo/Laravel-Roles-and-Permissions", 
-      		title : "Laravel-Roles-and-Permissions"
-      	},
-      	{
-      		name : "Laravel RESTful API Login and Register CRUD development", 
-      		gitHubLink : "https://github.com/ajay-laxyo/RESTful-API-Login-Register-and-CRUD-With-Resource-in-laravel-6", 
-      		title : "RESTful-API-Login-Register-and-CRUD-With-Resource-in-laravel-6"
-      	}
-      ]
+      
       }
   },
   methods : {
-      
+      deleteStds(){
+      	this.stds.pop();
+      }
   },
 
   computed : {
